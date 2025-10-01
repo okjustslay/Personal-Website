@@ -60,6 +60,42 @@
             visibility: visible;
             opacity: 1;
         }
+
+        /* Custom Styles for Video Background */
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .hero-video {
+            /* Ensures the video covers the entire container */
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Dimming effect: semi-transparent black (40% opacity) */
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3; /* Ensure content is on top of overlay and video */
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -97,11 +133,28 @@
     </div>
 
     <main>
-        <!-- Hero Section -->
-        <section id="hero" class="relative min-h-screen flex items-center justify-center text-center p-8 bg-gradient-to-br from-purple-100 to-white">
-            <div class="container fade-in">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-800 mb-4 tracking-tight">Siley Malakbaba</h1>
-                <p class="text-xl md:text-2xl font-medium text-gray-600 mb-8">Aspiring Software Developer | Recent Graduate | Entrepreneur | Stylist </p>
+        <!-- Hero Section with Video Background -->
+        <section id="hero" class="relative min-h-screen flex items-center justify-center text-center p-8 bg-gray-900">
+            <!-- Video Background Container -->
+            <div class="hero-video-container">
+                <!-- 
+                    *** USING GITHUB RAW URL FOR VIDEO: okjustslay/Personal-Website/Head Video.mp4 ***
+                    Note: The browser automatically handles the space by encoding it as %20.
+                -->
+                <video class="hero-video" autoplay loop muted playsinline poster="https://i.imgur.com/vHq05sM.png">
+                    <!-- Raw GitHub URL for the video -->
+                    <source src="https://raw.githubusercontent.com/okjustslay/Personal-Website/main/Head%20Video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <!-- Dimming Overlay (z-index: 2) -->
+            <div class="video-overlay"></div>
+
+            <!-- Content Container (z-index: 3) -->
+            <div class="container fade-in hero-content">
+                <!-- Text colors changed to white/light gray for contrast over the dark video background -->
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">Siley Malakbaba</h1>
+                <p class="text-xl md:text-2xl font-medium text-gray-200 mb-8">Aspiring Software Developer | Recent Graduate | Entrepreneur | Stylist </p>
                 <a href="#projects" class="scroll-to-projects-button inline-block px-8 py-4 bg-purple-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-purple-700 transition-colors duration-300">View My Work</a>
             </div>
         </section>
@@ -110,7 +163,10 @@
         <section id="about" class="py-20 md:py-32 fade-in container">
             <div class="md:flex md:space-x-12 items-center">
                 <div class="md:w-1/3 mb-8 md:mb-0 text-center">
-                    <img src="https://placehold.co/300x300/F7FAFC/A0AEC0?text=Siley" alt="Siley's Headshot" class="rounded-full w-48 h-48 md:w-64 md:h-64 mx-auto mb-4 object-cover border-4 border-white shadow-xl">
+                    <!-- 
+                        *** USING GITHUB RAW URL FOR IMAGE: okjustslay/Personal-Website/Siley_Headshot_PC.png ***
+                    -->
+                    <img src="https://raw.githubusercontent.com/okjustslay/Personal-Website/main/Siley_Headshot_PC.png" alt="Siley's Headshot" class="rounded-full w-48 h-48 md:w-64 md:h-64 mx-auto mb-4 object-cover border-4 border-white shadow-xl">
                 </div>
                 <div class="md:w-2/3">
                     <h2 class="text-3xl md:text-4xl font-bold text-purple-600 mb-6">About Me</h2>
@@ -135,30 +191,30 @@
         <section id="projects" class="py-20 md:py-32 fade-in container">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-purple-600 mb-12">Featured Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                <!-- Project Card 1 -->
+                <!-- Project Card 1: AI Recipe Generator (Using Unsplash Placeholder) -->
                 <div class="bg-white p-6 rounded-xl shadow-md project-card" data-project="recipe-generator">
-                    <img src="https://placehold.co/600x400/D6BCFA/4A5568?text=AI+Recipe+Generator" alt="AI Recipe Generator thumbnail" class="w-full rounded-lg mb-4">
+                    <img src="https://images.unsplash.com/photo-1542435503-921d58fb3e87?q=80&w=600&h=400&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="AI Recipe Generator thumbnail" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold text-gray-800">AI-Powered Recipe Generator</h3>
                     <p class="text-sm text-gray-600 mt-2">A smart web app that creates custom recipes based on available ingredients and dietary preferences.</p>
                     <button class="view-details-button mt-4 px-6 py-2 text-sm rounded-full bg-purple-600 text-white font-medium hover:bg-purple-700 transition-colors duration-300">View Details</button>
                 </div>
-                <!-- Project Card 2 -->
+                <!-- Project Card 2: E-commerce Redesign (Using Unsplash Placeholder) -->
                 <div class="bg-white p-6 rounded-xl shadow-md project-card" data-project="ecommerce-redesign">
-                    <img src="https://placehold.co/600x400/D6BCFA/4A5568?text=E-commerce+Redesign" alt="E-commerce Redesign thumbnail" class="w-full rounded-lg mb-4">
+                    <img src="https://images.unsplash.com/photo-1556742502-ec7c9a18d1a1?q=80&w=600&h=400&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="E-commerce Redesign thumbnail" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold text-gray-800">E-commerce Website Redesign</h3>
                     <p class="text-sm text-gray-600 mt-2">A complete front-end overhaul of an online store to improve user experience and visual appeal.</p>
                     <button class="view-details-button mt-4 px-6 py-2 text-sm rounded-full bg-purple-600 text-white font-medium hover:bg-purple-700 transition-colors duration-300">View Details</button>
                 </div>
-                <!-- Project Card 3 -->
+                <!-- Project Card 3: Fitness Tracker (Using Unsplash Placeholder) -->
                 <div class="bg-white p-6 rounded-xl shadow-md project-card" data-project="fitness-tracker">
-                    <img src="https://placehold.co/600x400/D6BCFA/4A5568?text=Mobile+Fitness+Tracker" alt="Mobile Fitness Tracker thumbnail" class="w-full rounded-lg mb-4">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f9a695b4?q=80&w=600&h=400&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mobile Fitness Tracker thumbnail" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold text-gray-800">Mobile Fitness Tracker App</h3>
                     <p class="text-sm text-gray-600 mt-2">A mobile application that tracks workouts and monitors user progress over time.</p>
                     <button class="view-details-button mt-4 px-6 py-2 text-sm rounded-full bg-purple-600 text-white font-medium hover:bg-purple-700 transition-colors duration-300">View Details</button>
                 </div>
-                <!-- Project Card 4 -->
+                <!-- Project Card 4: Data Viz Dashboard (Using Unsplash Placeholder) -->
                 <div class="bg-white p-6 rounded-xl shadow-md project-card" data-project="data-viz-dashboard">
-                    <img src="https://placehold.co/600x400/D6BCFA/4A5568?text=Data+Viz+Dashboard" alt="Data Visualization Dashboard thumbnail" class="w-full rounded-lg mb-4">
+                    <img src="https://images.unsplash.com/photo-1551288258-4cce823386ae?q=80&w=600&h=400&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Data Visualization Dashboard thumbnail" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold text-gray-800">Data Visualization Dashboard</h3>
                     <p class="text-sm text-gray-600 mt-2">An interactive dashboard to visualize and analyze complex datasets with charts and graphs.</p>
                     <button class="view-details-button mt-4 px-6 py-2 text-sm rounded-full bg-purple-600 text-white font-medium hover:bg-purple-700 transition-colors duration-300">View Details</button>
@@ -174,18 +230,36 @@
                 <div class="flex flex-col space-y-6">
                     <h3 class="text-2xl font-semibold mb-2">Contact Details</h3>
                     <p class="text-lg">I'm currently seeking new opportunities and would love to hear from you. Feel free to reach out to me through any of the following channels.</p>
-                    <a href="mailto:siley.malakbaba@email.com" class="flex items-center space-x-2 text-lg text-gray-600 hover:text-pink-500 transition-colors duration-300">
+                    
+                    <!-- Email Link -->
+                    <a href="mailto:sileymalak@gmail.com" class="flex items-center space-x-2 text-lg text-gray-600 social-link">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-9 13v-9"></path></svg>
                         <span>sileymalak@gmail.com</span>
                     </a>
-                    <a href="https://linkedin.com/in/sileymalakbaba" target="_blank" class="flex items-center space-x-2 text-lg text-gray-600 hover:text-pink-500 transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM4 12h4v8H4zM6 8a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                    
+                    <!-- LinkedIn Link -->
+                    <a href="https://linkedin.com/in/sileymalakbaba" target="_blank" class="flex items-center space-x-2 text-lg text-gray-600 social-link">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21v-4a4 4 0 00-4-4h-4a4 4 0 00-4 4v4h-4V8h4V4a4 4 0 014-4h4a4 4 0 014 4v4h4v13z"></path></svg>
                         <span>LinkedIn</span>
                     </a>
-                    <a href="https://github.com/okjustslay" target="_blank" class="flex items-center space-x-2 text-lg text-gray-600 hover:text-pink-500 transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87c0-.52-.16-.94-.44-1.22-.9-.75-2.12-.5-3.32-.42-1.39.09-2.84.14-4.32.14-1.5 0-2.95-.05-4.34-.14-1.2-.08-2.42-.33-3.32.42-.28.28-.44.7-.44 1.22V19m11-5H5l-1-2h12l-1 2zM12 4a3 3 0 110 6 3 3 0 010-6z"></path></svg>
+
+                    <!-- GitHub Link -->
+                    <a href="https://github.com/okjustslay" target="_blank" class="flex items-center space-x-2 text-lg text-gray-600 social-link">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87c0-.52-.16-.94-.44-1.22-.9-.75-2.12-.5-3.32-.42-1.39.09-2.84.14-4.32.14-1.5 0-2.95-.05-4.34-.14-1.2-.08-2.42-.33-3.32.42-.28.28-.44.7-.44 1.22V19m11-5H5l-1-2h12l-1 2zM12 4a3 3 0 110 6 3 3 0 010-6z"></path></svg>
                         <span>GitHub</span>
                     </a>
+
+                    <!-- Instagram Link (Placeholder) -->
+                    <a href="https://instagram.com/sileymalak" target="_blank" class="flex items-center space-x-2 text-lg text-gray-600 social-link">
+                        <!-- Generic Instagram-style Icon SVG -->
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+                            <line x1="17.5" x2="17.5" y1="6.5" y2="6.5"></line>
+                        </svg>
+                        <span>Instagram (@sileymalak)</span>
+                    </a>
+
                     <a href="/siley-cv.pdf" download class="mt-4 px-6 py-2 rounded-full border border-purple-600 text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition-colors duration-300 self-start">Download CV</a>
                 </div>
                 <!-- Contact Form -->
@@ -216,8 +290,10 @@
     <footer class="bg-gray-800 text-gray-400 py-6 text-center">
         <p>&copy; 2025 Siley Malakbaba. All rights reserved.</p>
         <div class="flex justify-center space-x-4 mt-2">
+            <!-- Footer social links already use the social-link class -->
             <a href="https://linkedin.com/in/sileymalakbaba" target="_blank" class="social-link">LinkedIn</a>
             <a href="https://github.com/okjustslay" target="_blank" class="social-link">GitHub</a>
+            <a href="https://instagram.com/sileymalak" target="_blank" class="social-link">Instagram</a>
         </div>
     </footer>
 
@@ -246,12 +322,16 @@
         const formMessage = document.getElementById('form-message');
 
         // Data for project overlays
+        // NOTE: Placeholder images here are set to match the cards above.
         const projectsData = {
             'recipe-generator': {
                 title: 'AI-Powered Recipe Generator',
                 description: 'This project utilizes a machine learning model to generate unique recipes based on user inputs like available ingredients, dietary restrictions, and preferred cuisine. The front-end is built to be a simple and intuitive chat interface where users can interact with the AI model. It was a capstone project for my AI & Machine Learning course, demonstrating my ability to integrate complex backend logic with a clean user experience.',
                 technologies: ['Python', 'TensorFlow', 'Flask', 'JavaScript', 'HTML', 'CSS'],
-                images: ['https://placehold.co/800x600/D6BCFA/4A5568?text=App+Screenshot+1', 'https://placehold.co/800x600/D6BCFA/4A5568?text=App+Screenshot+2'],
+                images: [
+                    'https://images.unsplash.com/photo-1542435503-921d58fb3e87?q=80&w=800&h=600&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+                    'https://images.unsplash.com/photo-1506368249639-73a05d6f6488?q=80&w=800&h=600&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                ],
                 liveLink: '#',
                 githubLink: 'https://github.com/sileym/ai-recipe-generator'
             },
@@ -259,7 +339,10 @@
                 title: 'E-commerce Website Redesign',
                 description: 'A complete front-end redesign of an existing e-commerce site. The goal was to improve user navigation, create a responsive design for mobile devices, and implement modern UI/UX principles. Key features include a simplified checkout process, a product filter system, and a more visually appealing product gallery. This project showcases my skills in front-end development and attention to detail in creating a professional user interface.',
                 technologies: ['React', 'Tailwind CSS', 'JavaScript'],
-                images: ['https://placehold.co/800x600/D6BCFA/4A5568?text=Website+Mockup+1', 'https://placehold.co/800x600/D6BCFA/4A5568?text=Website+Mockup+2'],
+                images: [
+                    'https://images.unsplash.com/photo-1556742502-ec7c9a18d1a1?q=80&w=800&h=600&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+                    'https://images.unsplash.com/photo-1556740713-ff78097b6a65?q=80&w=800&h=600&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                ],
                 liveLink: '#',
                 githubLink: 'https://github.com/sileym/ecommerce-redesign'
             },
@@ -267,7 +350,10 @@
                 title: 'Mobile Fitness Tracker App',
                 description: 'A mobile-first application designed to help users track their fitness goals. It allows users to log workouts, track calories burned, and visualize progress with simple graphs. The app features a clean interface with a focus on ease of use. This project taught me a lot about mobile development best practices and state management in a single-page application.',
                 technologies: ['React Native', 'Firebase', 'Redux'],
-                images: ['https://placehold.co/800x600/D6BCFA/4A5568?text=App+Screenshot+1', 'https://placehold.co/800x600/D6BCFA/4A5568?text=App+Screenshot+2'],
+                images: [
+                    'https://images.unsplash.com/photo-1571019613454-1cb2f9a695b4?q=80&w=800&h=600&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+                    'https://images.unsplash.com/photo-1549068106-b024baf50d53?q=80&w=800&h=600&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                ],
                 liveLink: '#',
                 githubLink: 'https://github.com/okjustslay/fitness-tracker-app'
             },
@@ -275,7 +361,10 @@
                 title: 'Data Visualization Dashboard',
                 description: 'An interactive web-based dashboard for visualizing complex datasets. I used D3.js and Chart.js to create dynamic charts, including bar charts, line graphs, and pie charts, that update in real-time. The dashboard is responsive and allows users to filter data and customize views. This project highlights my skills in data handling, visualization, and building a powerful front-end for data analysis.',
                 technologies: ['JavaScript', 'D3.js', 'Chart.js', 'HTML', 'CSS'],
-                images: ['https://placehold.co/800x600/D6BCFA/4A5568?text=Dashboard+View+1', 'https://placehold.co/800x600/D6BCFA/4A5568?text=Dashboard+View+2'],
+                images: [
+                    'https://images.unsplash.com/photo-1551288258-4cce823386ae?q=80&w=800&h=600&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+                    'https://images.unsplash.com/photo-1521737711854-00d9494337b5?q=80&w=800&h=600&fit=crop&auto=format&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                ],
                 liveLink: '#',
                 githubLink: 'https://github.com/sileym/data-viz-dashboard'
             }
@@ -389,3 +478,4 @@
     </script>
 </body>
 </html>
+
